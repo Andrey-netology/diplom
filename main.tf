@@ -55,6 +55,75 @@ terraform {
   }
 }
 
+resource "yandex_compute_instance" "node-1" {
+  name = "node-1"
+
+  resources {
+    cores  = 2
+    memory = 2
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = "fd83uvj8kqqmat838872"
+    }
+  }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.vpc1.id
+  }
+
+  metadata = {
+    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+  }
+}
+
+resource "yandex_compute_instance" "node-2" {
+  name = "node-2"
+
+  resources {
+    cores  = 2
+    memory = 2
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = "fd83uvj8kqqmat838872"
+    }
+  }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.vpc1.id
+  }
+
+  metadata = {
+    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+  }
+}
+
+resource "yandex_compute_instance" "node-3" {
+  name = "node-3"
+
+  resources {
+    cores  = 2
+    memory = 2
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = "fd83uvj8kqqmat838872"
+    }
+  }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.vpc1.id
+  }
+
+  metadata = {
+    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+  }
+}
+
 resource "yandex_vpc_network" "network-1" {
   name = "network1"
 }
