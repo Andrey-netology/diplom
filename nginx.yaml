@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-nginx2
+  labels:
+    environment: nginx2
+    app: pod-nginx2
+spec:
+  containers:
+  - image: vostok5/nginx:v2
+    name: nginx2
+    ports:
+    - containerPort: 80
