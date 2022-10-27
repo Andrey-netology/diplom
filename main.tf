@@ -116,7 +116,7 @@ resource "yandex_compute_instance" "node-3" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.vpc1.id
+    subnet_id = yandex_vpc_subnet.vpc2.id
   }
 
   metadata = {
