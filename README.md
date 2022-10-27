@@ -42,8 +42,26 @@ ansible-playbook -i inventory/mycluster/inventory.ini
 - kubectl apply -f manifests/
 
 7. Поднятие jenkins.
-Выполнить команды:
-- cd diplom 
-- kubectl create namespace jenkins
-- kubectl create -f jenkins.yaml --namespace jenkins
-- kubectl create -f jenkins-service.yaml --namespace jenkins
+
+- устанавливаем менеджер пакетов HELM: 
+
+$ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+$ chmod 700 get_helm.sh
+$ ./get_helm.sh
+
+- добавляем необходимые репозитории: 
+
+helm repo add jenkins https://charts.jenkins.io
+helm repo update
+
+- устанавливаем jenkins (values-override.yaml - подставляю свой файл кунфигурации jenkins):
+ 
+helm install --name jenkins --namespace jenkins -f jenkins/values-override.yaml stable/jenkins
+
+Получается в файл конфигурации прописывается запуск CI/CD для Dockerfile, который находится в registry. 
+(К сожалению я тут несправился, не получилось сделать файл конфигурации который выполняет данный функционал.....)
+
+
+При создании однотипных ресурсов в терраформе (ВМ) не стоит копипастить - тут необходимо использовать специальный модуль, читал мануил по Terraform не смог его найти (думаю найду но на это понадобится время, боюсь не успею в срок....) 
+
+
